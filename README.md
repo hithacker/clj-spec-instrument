@@ -8,17 +8,11 @@ Run it with `lein run`
 
 ## Examples
 
-If you run it with SHOULD_INSTRUMENT enviornment variable true then it will turn on checking of specs automatically on function invocations.
+If you run it with SHOULD_INSTRUMENT enviornment variable false then it will turn off checking of specs automatically on function invocations.
 
 e.g.
 
-`SHOULD_INSTRUMENT=true lein run` .
-
-If you don't specify SHOULD_INSTRUMENT enviornment variable then functions will be invoked without running specs first.
-
-e.g.
-
-`SHOULD_INSTRUMENT=true lein run`
+`SHOULD_INSTRUMENT=false lein run` .
 
 ## License
 
