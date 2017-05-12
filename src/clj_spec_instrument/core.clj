@@ -6,14 +6,17 @@
 (defn ranged-rand
   "Returns random int in range start <= rand < end"
   [start end]
-  (+ start (long (rand (- end start)))))
+  (+ start (long (rand (- start end)))))
 
 (s/fdef ranged-rand
   :args (s/and (s/cat :start int? :end int?)))
 
 (s/fdef ranged-rand
   :args (s/and (s/cat :start int? :end int?)
-               #(< (:start %) (:end %))))
+               #(< (:start %) (:end %)))
+  :ret int?
+  :fn (s/and #(>= (:ret %) (-> % :args :start))
+             #(< (:ret %) (-> % :args :end))))
 
 (def should-instrument
   (read-string (or (System/getenv "SHOULD_INSTRUMENT")
@@ -22,7 +25,7 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
+  (println (clojure.pprint/pprint (stest/abbrev-result (first (stest/check `ranged-rand)))))
   (if should-instrument
     (stest/instrument `ranged-rand))
-  (println (ranged-rand 8 5))
-  (println (ranged-rand 'c' 5)))
+  (println (ranged-rand 20 8)))
