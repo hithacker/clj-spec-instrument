@@ -28,4 +28,4 @@
   (println (clojure.pprint/pprint (stest/abbrev-result (first (stest/check `ranged-rand)))))
   (if should-instrument
     (stest/instrument `ranged-rand))
-  (println (ranged-rand 20 8)))
+  (println (ranged-rand -1 2)))
